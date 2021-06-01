@@ -1,6 +1,9 @@
 package com.example.carro.carro.controller;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -23,7 +26,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/carros")
+@RequestMapping("/api/cars")
 public class CarController {
 
     @Autowired
@@ -78,24 +81,30 @@ public class CarController {
         return carRepository.Barato(barato);
     }
 
+    // Não consegui Ordenar
     @GetMapping(path = "/carros/{nome}")
     public List<Car> ordemNome(@PathVariable String nome) {
         List<Car> car = carRepository.findCarByNome(nome);
-        // convert.toCarDto(car);
-        return Collections.sort(car);
+        convert.toCarDto(car);
+        return null;
+        // return Collections.sort(car);
     }
 
+    // Não consegui Ordenar
     @GetMapping(path = "/carros/{valor}")
     public List<Car> ordemValor(@PathVariable Double valor) {
         List<Car> car = carRepository.findCarByValor(valor);
         convert.toCarDto(car);
-        return Collections.sort(car);
+        return null;
+        // return Collections.sort(car);
     }
 
+    // Não consegui Ordenar
     @GetMapping(path = "/carros/{anoFabric}")
     public List<Car> ordemAno(@PathVariable String anoFabric) {
         List<Car> car = carRepository.findCarByAnoFabric(anoFabric);
         convert.toCarDto(car);
-        return Collections.sort(car);
+        return null;
+        // return Collections.sort(car);
     }
 }

@@ -1,9 +1,7 @@
 package com.example.carro.carro.repository;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import com.example.carro.carro.controller.dto.CarDto;
 import com.example.carro.carro.model.Car;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -25,8 +23,8 @@ public interface CarRepository extends JpaRepository<Car, Long> {
     @Query("SELECT C FROM Car C WHERE valor=(SELECT MIN(valor) FROM Car)")
     List<Car> Barato(Double valor);
 
-    ArrayList<Car> findCarByValor(Double valor);
+    List<Car> findCarByValor(Double valor);
 
-    ArrayList<Car> findCarByAnoFabric(String anoFabric);
+    List<Car> findCarByAnoFabric(String anoFabric);
 
 }
