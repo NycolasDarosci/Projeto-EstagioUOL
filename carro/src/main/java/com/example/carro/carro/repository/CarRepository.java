@@ -1,19 +1,32 @@
 package com.example.carro.carro.repository;
 
-import java.util.Optional;
+import java.util.ArrayList;
+import java.util.List;
 
+import com.example.carro.carro.controller.dto.CarDto;
 import com.example.carro.carro.model.Car;
-import com.example.carro.carro.model.response.CarResponse;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.http.ResponseEntity;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CarRepository extends JpaRepository<Car, Long> {
 
-    Car findByChassi(String chassi);
+    List<Car> findCarByMarca(String marca);
 
-    ResponseEntity<CarResponse> save(CarResponse car);
+    List<Car> findCarByNome(String nome);
+
+    List<Car> findCarByCor(String cor);
+
+    @Query("SELECT C FROM Car C WHERE valor=(SELECT MAX(valor) FROM Car)")
+    List<Car> Caro(Double valor);
+
+    @Query("SELECT C FROM Car C WHERE valor=(SELECT MIN(valor) FROM Car)")
+    List<Car> Barato(Double valor);
+
+    ArrayList<Car> findCarByValor(Double valor);
+
+    ArrayList<Car> findCarByAnoFabric(String anoFabric);
 
 }
